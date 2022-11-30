@@ -40,6 +40,12 @@ impl Scope {
         }
     }
 
+    /// Set the scope documentation.
+    pub fn doc(&mut self, docs: impl ToString) -> &mut Self {
+        self.docs = Some(Docs::new(docs));
+        self
+    }
+
     /// Import a type into the scope.
     ///
     /// This results in a new `use` statement being added to the beginning of
@@ -256,6 +262,10 @@ impl Scope {
 
     /// Formats the scope using the given formatter.
     pub fn fmt(&self, fmt: &mut Formatter<'_>) -> fmt::Result {
+        if let Some(ref docs) = self.docs {
+            docs.fmt(fmt)?;
+        }
+
         self.fmt_imports(fmt)?;
 
         if !self.imports.is_empty() {

@@ -41,6 +41,12 @@ impl Module {
         }
     }
 
+    /// Set the module documentation.
+    pub fn doc(&mut self, docs: impl ToString) -> &mut Self {
+        self.docs = Some(Docs::new(docs));
+        self
+    }
+
     /// Returns a mutable reference to the module's scope.
     pub fn scope(&mut self) -> &mut Scope {
         &mut self.scope
@@ -182,6 +188,10 @@ impl Module {
 
     /// Formats the module using the given formatter.
     pub fn fmt(&self, fmt: &mut Formatter<'_>) -> fmt::Result {
+        if let Some(ref docs) = self.docs {
+            docs.fmt(fmt)?;
+        }
+
         for attr in &self.attributes {
             writeln!(fmt, "#[{}] ", attr)?;
         }
