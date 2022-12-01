@@ -9,8 +9,8 @@ license = "MIT"
 authors = ["Carl Lerche <me@carllerche.com>", "Carter Schultz <carterjschultz@gmail.com>", "Iovoslav Iovchev"]
 description = "Library for generating Rust code"
 documentation = "https://docs.rs/codegen/0.2.0/codegen"
-homepage = "https://github.com/carllerche/codegen"
-repository = "https://github.com/carllerche/codegen"
+homepage = "https://gitlab.com/IovoslavIovchev/codegen"
+repository = "https://gitlab.com/IovoslavIovchev/codegen"
 readme = "README.md"
 edition = "2021"
 
