@@ -6,6 +6,12 @@ More information about this crate can be found in the [crate documentation][dox]
 
 [dox]: https://docs.rs/codegen/0.2.0/codegen/
 
+<p align="center">
+    <a href="https://discord.gg/gszyZwNq">
+        <img src="https://img.shields.io/discord/1078424170754486404" alt="Discord">
+    </a>
+</p>
+
 ## Installation
 
 To use `codegen`, first add this to your `Cargo.toml`:
