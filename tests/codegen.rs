@@ -336,6 +336,45 @@ struct Foo {
 }
 
 #[test]
+fn function_doc() {
+    let mut scope = Scope::new();
+
+    let f = scope.new_fn("pet_toby");
+    f.line("println!(\"petting Toby many times because he is such a good boi\");");
+    f.doc("This is a function comment.");
+
+    let expect = r#"
+/// This is a function comment.
+fn pet_toby() {
+    println!("petting Toby many times because he is such a good boi");
+}"#;
+
+    assert_eq!(scope.to_string(), &expect[1..]);
+}
+
+#[test]
+fn scope_doc() {
+    let mut scope = Scope::new();
+    scope.doc("This is a scope comment.\nThis is a newline");
+    let expect = r#"
+/// This is a scope comment.
+/// This is a newline"#;
+    assert_eq!(scope.to_string(), &expect[1..]);
+}
+
+#[test]
+fn module_doc() {
+    let mut scope = Scope::new();
+    let m = scope.new_module("toby");
+    m.doc("This is a module comment.");
+    let expect = r#"
+/// This is a module comment.
+mod toby {
+}"#;
+    assert_eq!(scope.to_string(), &expect[1..]);
+}
+
+#[test]
 fn struct_in_mod() {
     let mut scope = Scope::new();
 
