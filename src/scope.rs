@@ -59,7 +59,7 @@ impl Scope {
             .entry(path.to_string())
             .or_insert(IndexMap::new())
             .entry(ty.to_string())
-            .or_insert_with(|| Import::new(path, ty))
+            .or_insert_with(|| Import::new())
     }
 
     /// Push a new module definition, returning a mutable reference to it.

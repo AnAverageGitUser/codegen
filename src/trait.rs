@@ -18,7 +18,6 @@ pub struct Trait {
     attributes: Vec<String>,
     associated_tys: Vec<AssociatedType>,
     fns: Vec<Function>,
-    macros: Vec<String>,
 }
 
 impl Trait {
@@ -31,7 +30,6 @@ impl Trait {
             attributes: Vec::new(),
             associated_tys: Vec::new(),
             fns: Vec::new(),
-            macros: Vec::new(),
         }
     }
 

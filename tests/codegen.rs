@@ -62,7 +62,7 @@ fn single_struct_documented_field() {
     let mut struct_ = Struct::new("Foo");
 
     let mut field1 = Field::new("one", "usize");
-    field1.doc(doc.clone());
+    field1.doc(doc);
     struct_.push_field(field1);
 
     let mut field2 = Field::new("two", "usize");
