@@ -1,6 +1,6 @@
 # Codegen
 
-Provides an builder API to assist in generating Rust code.
+Provides a builder API to assist in generating Rust code.
 
 More information about this crate can be found in the [crate documentation][dox]
 
@@ -8,17 +8,11 @@ More information about this crate can be found in the [crate documentation][dox]
 
 ## Installation
 
-To use `codegen`, first add this to your `Cargo.toml`:
+To use `codegen`, add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-codegen = "0.2.0"
-```
-
-Next, add this to your crate:
-
-```rust
-extern crate codegen;
+codegen = { git = "https://github.com/AnAverageGitUser/codegen.git", tag = "v0.3.0" }
 ```
 
 ## Usage

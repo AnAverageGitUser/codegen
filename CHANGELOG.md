@@ -1,6 +1,8 @@
-# <future version>
+# 0.3.0 (2024-11-06)
 
 ### Added
+- `const` support in `Scope`
+- type alias support in `Module`
 
 ### Changed
 
