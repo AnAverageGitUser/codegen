@@ -217,11 +217,11 @@ impl Function {
         }
 
         if let Some(ref allow) = self.allow {
-            write!(fmt, "#[allow({})]\n", allow)?;
+            writeln!(fmt, "#[allow({})]", allow)?;
         }
 
         for attr in self.attributes.iter() {
-            write!(fmt, "#[{}]\n", attr)?;
+            writeln!(fmt, "#[{}]", attr)?;
         }
 
         if is_trait {
@@ -283,7 +283,7 @@ impl Function {
                     panic!("impl blocks must define fn bodies");
                 }
 
-                write!(fmt, ";\n")
+                writeln!(fmt, ";")
             }
         }
     }

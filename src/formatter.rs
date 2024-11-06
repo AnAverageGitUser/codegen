@@ -38,9 +38,9 @@ impl<'a> Formatter<'a> {
             write!(self, " ")?;
         }
 
-        write!(self, "{{\n")?;
+        writeln!(self, "{{")?;
         self.indent(f)?;
-        write!(self, "}}\n")?;
+        writeln!(self, "}}")?;
         Ok(())
     }
 
@@ -62,7 +62,7 @@ impl<'a> Formatter<'a> {
 
     fn push_spaces(&mut self) {
         for _ in 0..self.spaces {
-            self.dst.push_str(" ");
+            self.dst.push(' ');
         }
     }
 }
@@ -74,7 +74,7 @@ impl<'a> fmt::Write for Formatter<'a> {
 
         for line in s.lines() {
             if !first {
-                self.dst.push_str("\n");
+                self.dst.push('\n');
             }
 
             first = false;
@@ -92,7 +92,7 @@ impl<'a> fmt::Write for Formatter<'a> {
         }
 
         if s.as_bytes().last() == Some(&b'\n') {
-            self.dst.push_str("\n");
+            self.dst.push('\n');
         }
 
         Ok(())
@@ -120,17 +120,17 @@ pub fn fmt_generics(generics: &[String], fmt: &mut Formatter<'_>) -> fmt::Result
 /// Format generic bounds.
 pub fn fmt_bounds(bounds: &[Bound], fmt: &mut Formatter<'_>) -> fmt::Result {
     if !bounds.is_empty() {
-        write!(fmt, "\n")?;
+        writeln!(fmt)?;
 
         // Write first bound
         write!(fmt, "where {}: ", bounds[0].name)?;
         fmt_bound_rhs(&bounds[0].bound, fmt)?;
-        write!(fmt, ",\n")?;
+        writeln!(fmt, ",")?;
 
         for bound in &bounds[1..] {
             write!(fmt, "      {}: ", bound.name)?;
             fmt_bound_rhs(&bound.bound, fmt)?;
-            write!(fmt, ",\n")?;
+            writeln!(fmt, ",")?;
         }
     }
 

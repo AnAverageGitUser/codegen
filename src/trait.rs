@@ -150,7 +150,7 @@ impl Trait {
                         fmt_bound_rhs(&cst.bound, fmt)?;
                     }
 
-                    write!(fmt, ";\n")?;
+                    writeln!(fmt, ";")?;
                 }
             }
 
@@ -166,13 +166,13 @@ impl Trait {
                         fmt_bound_rhs(&ty.bound, fmt)?;
                     }
 
-                    write!(fmt, ";\n")?;
+                    writeln!(fmt, ";")?;
                 }
             }
 
             for (i, func) in self.fns.iter().enumerate() {
                 if i != 0 || !assoc_tys.is_empty() || !assoc_csts.is_empty() {
-                    write!(fmt, "\n")?;
+                    writeln!(fmt)?;
                 }
 
                 func.fmt(true, fmt)?;

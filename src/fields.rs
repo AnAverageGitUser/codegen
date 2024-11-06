@@ -80,12 +80,12 @@ impl Fields {
                     for f in fields {
                         if !f.documentation.is_empty() {
                             for doc in f.documentation.lines() {
-                                write!(fmt, "/// {}\n", doc)?;
+                                writeln!(fmt, "/// {}", doc)?;
                             }
                         }
                         if !f.annotation.is_empty() {
                             for ann in &f.annotation {
-                                write!(fmt, "{}\n", ann)?;
+                                writeln!(fmt, "{}", ann)?;
                             }
                         }
                         if let Some(ref visibility) = f.visibility {
@@ -93,7 +93,7 @@ impl Fields {
                         }
                         write!(fmt, "{}: ", f.name)?;
                         f.ty.fmt(fmt)?;
-                        write!(fmt, ",\n")?;
+                        writeln!(fmt, ",")?;
                     }
 
                     Ok(())

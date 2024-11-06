@@ -5,6 +5,12 @@ pub struct Import {
     pub vis: Option<String>,
 }
 
+impl Default for Import {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Import {
     /// Return a new import.
     pub fn new() -> Self {

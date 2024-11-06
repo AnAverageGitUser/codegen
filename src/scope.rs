@@ -30,6 +30,12 @@ pub struct Scope {
     items: Vec<Item>,
 }
 
+impl Default for Scope {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Scope {
     /// Returns a new scope
     pub fn new() -> Self {
@@ -54,12 +60,12 @@ impl Scope {
         // handle cases where the caller wants to refer to a type namespaced
         // within the containing namespace, like "a::B".
         let ty = ty.to_string();
-        let ty = ty.split("::").next().unwrap_or_else(|| ty.as_str());
+        let ty = ty.split("::").next().unwrap_or(ty.as_str());
         self.imports
             .entry(path.to_string())
-            .or_insert(IndexMap::new())
+            .or_default()
             .entry(ty.to_string())
-            .or_insert_with(|| Import::new())
+            .or_default()
     }
 
     /// Push a new module definition, returning a mutable reference to it.
@@ -105,7 +111,7 @@ impl Scope {
         self.items
             .iter()
             .filter_map(|item| match item {
-                &Item::Module(ref module) if module.name == *name => Some(module),
+                Item::Module(module) if module.name == *name => Some(module),
                 _ => None,
             })
             .next()
@@ -285,12 +291,12 @@ impl Scope {
         self.fmt_imports(fmt)?;
 
         if !self.imports.is_empty() {
-            write!(fmt, "\n")?;
+            writeln!(fmt)?;
         }
 
         for (i, item) in self.items.iter().enumerate() {
             if i != 0 {
-                write!(fmt, "\n")?;
+                writeln!(fmt)?;
             }
 
             match *item {
@@ -301,7 +307,7 @@ impl Scope {
                 Item::Enum(ref v) => v.fmt(fmt)?,
                 Item::Impl(ref v) => v.fmt(fmt)?,
                 Item::Raw(ref v) => {
-                    write!(fmt, "{}\n", v)?;
+                    writeln!(fmt, "{}", v)?;
                 }
                 Item::TypeAlias(ref v) => v.fmt(fmt)?,
                 Item::Const(ref v) =>  v.fmt(fmt)?,
@@ -353,9 +359,9 @@ impl Scope {
                             write!(fmt, "{}", ty)?;
                         }
 
-                        write!(fmt, "}};\n")?;
+                        writeln!(fmt, "}};")?;
                     } else if tys.len() == 1 {
-                        write!(fmt, "{};\n", tys[0])?;
+                        writeln!(fmt, "{};", tys[0])?;
                     }
                 }
             }

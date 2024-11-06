@@ -66,6 +66,6 @@ impl Const {
 
         write!(fmt, "const {}: ", self.name)?;
         self.ty.fmt(fmt)?;
-        write!(fmt, " = {};\n", self.value)
+        writeln!(fmt, " = {};", self.value)
     }
 }

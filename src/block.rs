@@ -54,7 +54,7 @@ impl Block {
             write!(fmt, " ")?;
         }
 
-        write!(fmt, "{{\n")?;
+        writeln!(fmt, "{{")?;
 
         fmt.indent(|fmt| {
             for b in &self.body {
@@ -70,7 +70,7 @@ impl Block {
             write!(fmt, "{}", after)?;
         }
 
-        write!(fmt, "\n")?;
+        writeln!(fmt)?;
         Ok(())
     }
 }

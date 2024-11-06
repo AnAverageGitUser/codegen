@@ -49,11 +49,11 @@ impl Variant {
     pub fn fmt(&self, fmt: &mut Formatter<'_>) -> fmt::Result {
         for a in &self.annotations {
             write!(fmt, "{}", a)?;
-            write!(fmt, "\n")?;
+            writeln!(fmt)?;
         }
         write!(fmt, "{}", self.name)?;
         self.fields.fmt(fmt)?;
-        write!(fmt, ",\n")?;
+        writeln!(fmt, ",")?;
 
         Ok(())
     }

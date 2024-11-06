@@ -138,10 +138,10 @@ impl Struct {
 
         match self.fields {
             Fields::Empty => {
-                write!(fmt, ";\n")?;
+                writeln!(fmt, ";")?;
             }
             Fields::Tuple(..) => {
-                write!(fmt, ";\n")?;
+                writeln!(fmt, ";")?;
             }
             _ => {}
         }

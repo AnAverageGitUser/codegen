@@ -150,7 +150,7 @@ impl Impl {
     /// Formats the impl block using the given formatter.
     pub fn fmt(&self, fmt: &mut Formatter<'_>) -> fmt::Result {
         for m in self.macros.iter() {
-            write!(fmt, "{}\n", m)?;
+            writeln!(fmt, "{}", m)?;
         }
         write!(fmt, "impl")?;
         fmt_generics(&self.generics[..], fmt)?;
@@ -175,7 +175,7 @@ impl Impl {
                     }
                     write!(fmt, "const {}: ", cst.name)?;
                     cst.ty.fmt(fmt)?;
-                    write!(fmt, " = {};\n", cst.value)?;
+                    writeln!(fmt, " = {};", cst.value)?;
                 }
             }
 
@@ -184,13 +184,13 @@ impl Impl {
                 for ty in &self.assoc_tys {
                     write!(fmt, "type {} = ", ty.name)?;
                     ty.ty.fmt(fmt)?;
-                    write!(fmt, ";\n")?;
+                    writeln!(fmt, ";")?;
                 }
             }
 
             for (i, func) in self.fns.iter().enumerate() {
                 if i != 0 || !self.assoc_tys.is_empty() {
-                    write!(fmt, "\n")?;
+                    writeln!(fmt)?;
                 }
 
                 func.fmt(false, fmt)?;
