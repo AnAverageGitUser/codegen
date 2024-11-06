@@ -9,6 +9,7 @@ use crate::r#enum::Enum;
 use crate::r#impl::Impl;
 use crate::r#struct::Struct;
 use crate::r#trait::Trait;
+use crate::type_alias::TypeAlias;
 
 /// Defines a module.
 #[derive(Debug, Clone)]
@@ -139,6 +140,17 @@ impl Module {
     /// Push a structure definition
     pub fn push_struct(&mut self, item: Struct) -> &mut Self {
         self.scope.push_struct(item);
+        self
+    }
+
+    /// Push a new `TypeAlias`, returning a mutable reference to it.
+    pub fn new_type_alias(&mut self, name: impl ToString, target: impl ToString) -> &mut TypeAlias {
+        self.scope.new_type_alias(name, target)
+    }
+
+    /// Push an `TypeAlias`.
+    pub fn push_type_alias(&mut self, item: TypeAlias) -> &mut Self {
+        self.scope.push_type_alias(item);
         self
     }
 

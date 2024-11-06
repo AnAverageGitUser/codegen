@@ -427,6 +427,22 @@ mod foo {
 
     assert_eq!(scope.to_string(), &expect[1..]);
 }
+#[test]
+fn type_alias_in_mod() {
+    let mut scope = Scope::new();
+
+    {
+        let module = scope.new_module("foo");
+        module.new_type_alias("hello", "world").vis("pub");
+    }
+
+    let expect = r#"
+mod foo {
+    pub type hello = world;
+}"#;
+
+    assert_eq!(scope.to_string(), &expect[1..]);
+}
 
 #[test]
 fn enum_with_repr() {
