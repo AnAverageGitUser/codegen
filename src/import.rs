@@ -14,9 +14,7 @@ impl Default for Import {
 impl Import {
     /// Return a new import.
     pub fn new() -> Self {
-        Import {
-            vis: None,
-        }
+        Import { vis: None }
     }
 
     /// Set the import visibility.

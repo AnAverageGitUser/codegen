@@ -1,8 +1,8 @@
-use core::fmt;
-use std::fmt::Write;
-use crate::Formatter;
 use crate::docs::Docs;
 use crate::r#type::Type;
+use crate::Formatter;
+use core::fmt;
+use std::fmt::Write;
 
 /// Defines a constant.
 #[derive(Debug, Clone)]

@@ -40,13 +40,13 @@ mod scope;
 mod type_def;
 mod variant;
 
+mod r#const;
 mod r#enum;
 mod r#impl;
 mod r#struct;
 mod r#trait;
 mod r#type;
 mod type_alias;
-mod r#const;
 
 pub use associated_const::*;
 pub use associated_type::*;

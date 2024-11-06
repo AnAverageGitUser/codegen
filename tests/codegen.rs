@@ -720,7 +720,6 @@ struct Foo {
     assert_eq!(scope.to_string(), &expect[1..]);
 }
 
-
 #[test]
 fn scope_with_const() {
     let mut scope = Scope::new();

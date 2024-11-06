@@ -310,7 +310,7 @@ impl Scope {
                     writeln!(fmt, "{}", v)?;
                 }
                 Item::TypeAlias(ref v) => v.fmt(fmt)?,
-                Item::Const(ref v) =>  v.fmt(fmt)?,
+                Item::Const(ref v) => v.fmt(fmt)?,
             }
         }
 
