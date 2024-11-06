@@ -8,7 +8,7 @@ use crate::function::Function;
 use crate::import::Import;
 use crate::item::Item;
 use crate::module::Module;
-
+use crate::r#const::Const;
 use crate::r#enum::Enum;
 use crate::r#impl::Impl;
 use crate::r#struct::Struct;
@@ -222,6 +222,22 @@ impl Scope {
         self
     }
 
+    /// Push a new const, returning a mutable reference to it.
+    pub fn new_const(&mut self, target: impl ToString) -> &mut Const {
+        self.push_const(Const::new(target));
+
+        match *self.items.last_mut().unwrap() {
+            Item::Const(ref mut v) => v,
+            _ => unreachable!(),
+        }
+    }
+
+    /// Push a const.
+    pub fn push_const(&mut self, item: Const) -> &mut Self {
+        self.items.push(Item::Const(item));
+        self
+    }
+
     /// Push a raw string to the scope.
     ///
     /// This string will be included verbatim in the formatted string.
@@ -288,6 +304,7 @@ impl Scope {
                     write!(fmt, "{}\n", v)?;
                 }
                 Item::TypeAlias(ref v) => v.fmt(fmt)?,
+                Item::Const(ref v) =>  v.fmt(fmt)?,
             }
         }
 

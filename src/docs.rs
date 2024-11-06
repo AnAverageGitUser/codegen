@@ -26,3 +26,9 @@ impl Docs {
         Ok(())
     }
 }
+
+impl From<&str> for Docs {
+    fn from(value: &str) -> Self {
+        Docs::new(value)
+    }
+}

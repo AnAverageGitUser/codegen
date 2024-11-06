@@ -1,6 +1,6 @@
 use crate::function::Function;
 use crate::module::Module;
-
+use crate::r#const::Const;
 use crate::r#enum::Enum;
 use crate::r#impl::Impl;
 use crate::r#struct::Struct;
@@ -17,4 +17,5 @@ pub enum Item {
     Impl(Impl),
     Raw(String),
     TypeAlias(TypeAlias),
+    Const(Const),
 }

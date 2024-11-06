@@ -719,3 +719,22 @@ struct Foo {
 
     assert_eq!(scope.to_string(), &expect[1..]);
 }
+
+
+#[test]
+fn scope_with_const() {
+    let mut scope = Scope::new();
+
+    let cn = scope.new_const("MY_CONST");
+    cn.doc("doc comment".into());
+    cn.vis("pub");
+    cn.name("MY_CONST");
+    cn.ty("[usize; 4]");
+    cn.value("[1, 2, 3, 4  ]");
+
+    let expect = r#"
+/// doc comment
+pub const MY_CONST: [usize; 4] = [1, 2, 3, 4  ];"#;
+
+    assert_eq!(scope.to_string(), &expect[1..]);
+}
